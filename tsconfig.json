@@ -1,0 +1,14 @@
+{
+  "extends": "@quasar/app/tsconfig-preset",
+  "compilerOptions": {
+    "target": "esnext",
+    "strict": true,
+    "lib": [
+      "dom",
+      "es2019"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": "."
+  }
+}
