@@ -44,13 +44,12 @@
     button(@click="setTemplate") Ustaw
     br
     input(type="number" v-model="fps")
-    input(type="number" v-model="state.foo")
-    input(type="number" v-model="state.bar")
 </template>
 
 <script lang="ts">
 import { ref, defineComponent, onUnmounted, Ref, reactive, watch } from '@vue/composition-api';
 import { debounce } from 'lodash';
+import useInterval from '../utils/useInterval';
 
 /*
  * Works much better with Vue 3.0 for which it was written
@@ -228,28 +227,16 @@ export default defineComponent({
     let forces = ref<Forces>({});
     const fps = ref(30);
 
-    const state = reactive({
-      foo: '',
-      bar: ''
-    });
-
     watch(graph, () => {
       forces.value = {};
     });
 
-    let intervalUpdate = 0;
-    const updateFps = (fps: number) => {
-      clearInterval(intervalUpdate);
-      intervalUpdate = setInterval(() => {
-        const newForces = physicStep(graph.value, forces.value, 1 / fps);
-        forces.value = applyForces(graph, newForces, 1 / fps);
-      }, 1000 / fps) as unknown as number;
-    };
-    watch(fps, debounce(updateFps, 500), { immediate: true });
-
-    onUnmounted(() => {
-      clearInterval(intervalUpdate);
-    });
+    const updateFps = useInterval((delta: number) => {
+      console.log(delta)
+        const newForces = physicStep(graph.value, forces.value, delta/1000);
+        forces.value = applyForces(graph, newForces, delta/1000);
+    }, 1000 / fps.value);
+    watch(fps, debounce((fps: number) => updateFps(1000/fps), 500), { immediate: false });
 
     let isDown = false;
     let selected: string | null = null;
@@ -273,8 +260,6 @@ export default defineComponent({
         if (!isDown || selected == null) {
           return;
         }
-        console.log(ev)
-        // const diff = [ev.clientX - last[0], ev.clientY - last[1]]
         graph.value.nodes[selected].x = ev.offsetX;
         graph.value.nodes[selected].y = ev.offsetY;
       },
@@ -282,7 +267,6 @@ export default defineComponent({
       setTemplate() {
         graph.value = JSON.parse(template.value) as Graph;
       },
-      state
     };
   }
 });
