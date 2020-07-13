@@ -13,12 +13,13 @@
 import Vue from 'vue';
 
 import ExampleComponent from 'components/CompositionComponent.vue';
-import { Todo, Meta } from 'components/models';
+import { Todo } from '../components/models';
+import { Meta } from 'quasar';
 
 export default Vue.extend({
   name: 'PageIndex',
   components: { ExampleComponent },
-  data() {
+  data(){
     const todos: Todo[] = [
       {
         id: 1,

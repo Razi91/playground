@@ -3,12 +3,35 @@
   "compilerOptions": {
     "target": "esnext",
     "strict": true,
+    "esModuleInterop": true,
     "lib": [
       "dom",
       "es2019"
     ],
     "module": "esnext",
     "moduleResolution": "node",
-    "baseUrl": "."
-  }
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "ol": [
+        "node_modules/@hanreev/types-ol/ol"
+      ],
+      "ol/*": [
+        "node_modules/@hanreev/types-ol/ol/*"
+      ],
+      "components": [
+        "src/components/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "./src/**/*.tsx",
+    "./src/**/*.ts",
+    "./src/**/*.vue",
+    "./tests/**/*.ts"
+  ]
 }

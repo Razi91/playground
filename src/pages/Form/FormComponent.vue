@@ -22,11 +22,11 @@
 /* eslint "@typescript-eslint/no-unsafe-member-access": 0 */
 /* eslint "@typescript-eslint/no-unsafe-assignment": 0 */
 import { defineComponent, PropType } from '@vue/composition-api';
-import { FormField, FormGroup } from 'pages/Form/FormTypes';
 import {
   QInput, QSelect
 } from 'quasar';
 import DatePicker from 'pages/Form/fields/DatePicker.vue';
+import { FormField, FormGroup } from './FormTypes';
 
 /*
 Wiem że nieoptymalne, jest to przeniesiony mechanizm dynamicznych formularzy z innego projektu pisanego pod Vuetify.
