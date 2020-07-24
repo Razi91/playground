@@ -4,6 +4,7 @@
     "target": "esnext",
     "strict": true,
     "esModuleInterop": true,
+    "rootDir": "./src/",
     "lib": [
       "dom",
       "es2019"
@@ -23,7 +24,13 @@
       "components": [
         "src/components/*"
       ],
+      "@components": [
+        "src/components/*"
+      ],
       "pages": [
+        "src/pages/*"
+      ],
+      "@pages": [
         "src/pages/*"
       ]
     }
@@ -32,6 +39,7 @@
     "node_modules"
   ],
   "include": [
+    "./*.js",
     "./src/**/*.tsx",
     "./src/**/*.ts",
     "./src/**/*.vue",

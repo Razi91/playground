@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api';
 import FormComponent from './Form/FormComponent.vue';
-import { FormGroup } from 'pages/Form/FormTypes';
+import { FormGroup } from './Form/FormTypes';
 
 type Entity = {
   name: string;
